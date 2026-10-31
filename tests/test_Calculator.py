@@ -1,35 +1,17 @@
-def calculate(a, b, operation):
-    """Calculate using addition."""
-    if type(a) not in (int, float) or type(b) not in (int, float):
-        raise TypeError("Both operands must be numbers.")
+import unittest
 
-    if operation == "+":
-        return a + b
-    else:
-        raise ValueError("Unsupported operation. Use +.")
+from Calculator import calculate
 
 
-def main():
-    print("Python Calculator")
-    print("Supported operations: +")
-    print("Type 'exit' to quit.")
+class TestCalculator(unittest.TestCase):
 
-    while True:
-        operation = input("Enter operation + ").strip()
+    # Addition tests
+    def test_addition_positive_numbers(self):
+        self.assertEqual(calculate(5, 3, "+"), 8)
 
-        if operation.lower() == "exit":
-            print("Goodbye!")
-            break
-
-        try:
-            a = float(input("Enter first number: "))
-            b = float(input("Enter second number: "))
-            result = calculate(a, b, operation)
-            print("Result:", result)
-
-        except (ValueError, TypeError) as error:
-            print("Error:", error)
+    def test_addition_negative_numbers(self):
+        self.assertEqual(calculate(-5, -3, "+"), -8)
 
 
 if __name__ == "__main__":
-    main()
+    unittest.main()
